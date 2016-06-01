@@ -1,6 +1,8 @@
 package com.example.russellm.oucheetest;
 
+import android.content.Context;
 import android.graphics.Point;
+import android.util.Log;
 
 /**
  * Created by RussellM on 1/06/2016.
@@ -11,10 +13,26 @@ public class Finger {
     Point base;
     float m;
     float c;
+    Context con;
 
-    public Finger(Point inBase,Point inNail) {
+    float sizeScale = 1.0f; // reference is 300dp x 300dp
+
+    public Finger(Point inBase,Point inNail,Context inContext) {
         nail = inNail;
         base = inBase;
+
+        con = inContext;
+
+        float dpi = con.getResources().getDisplayMetrics().density;
+        Log.d("dpi scale: ","" +dpi);
+        float r = dpi / 1.5f;
+        //reference dpi ratio is 1.5
+
+        nail.x*=r *sizeScale;
+        nail.y*=r * sizeScale;
+        base.x*=r * sizeScale;
+        base.y*=r * sizeScale;
+
         if (nail.x == base.x) {
             m = 99999;
             c = 0;

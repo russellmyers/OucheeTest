@@ -30,6 +30,12 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        float dpi = getResources().getDisplayMetrics().density;
+        Log.d("dpi scale: ","" +dpi);
+        float r = dpi / 1.5f;
+
+
+
         final SoundPool sp1 = new SoundPool(5, AudioManager.STREAM_MUSIC, 0);
         final  SoundPool sp2 = new SoundPool(5, AudioManager.STREAM_MUSIC, 0);
         final  SoundPool sp3 = new SoundPool(5, AudioManager.STREAM_MUSIC, 0);
@@ -53,6 +59,10 @@ public class MainActivity extends AppCompatActivity {
         final ImageView imageView = (ImageView) findViewById(R.id.imageView);
         imageView.setImageResource(R.drawable.handtest);
 
+        int finalHeight = imageView.getMeasuredHeight();
+        int finalWidth = imageView.getMeasuredWidth();
+        Log.d("Image attributes","im w: " + finalWidth + " im h: " + finalHeight);
+
         final Bitmap bitmap = ((BitmapDrawable)imageView.getDrawable()).getBitmap();
 
         int pixel = bitmap.getPixel(100, 100);
@@ -63,12 +73,12 @@ public class MainActivity extends AppCompatActivity {
         mp2 = MediaPlayer.create(MainActivity.this, R.raw.wrong);
 
         final Hand h = new Hand();
-        h.addFinger(new Finger(new Point(103,373),new Point(28,289)));
-        h.addFinger(new Finger(new Point(159,309),new Point(145,175)));
-        h.addFinger(new Finger(new Point(257,264),new Point(220,143)));
-        h.addFinger(new Finger(new Point(297,162),new Point(280,287)));
-        h.addFinger(new Finger(new Point(320,323),new Point(389,257)));
-        final Finger fing = new Finger(new Point(159,309),new Point(145,175));
+        h.addFinger(new Finger(new Point(103,373),new Point(28,289),this));
+        h.addFinger(new Finger(new Point(159,309),new Point(145,175),this));
+        h.addFinger(new Finger(new Point(257,264),new Point(220,143),this));
+        h.addFinger(new Finger(new Point(297,162),new Point(280,287),this));
+        h.addFinger(new Finger(new Point(320,323),new Point(389,257),this));
+        final Finger fing = new Finger(new Point(159,309),new Point(145,175),this);
 
         imageView.setOnTouchListener(new View.OnTouchListener() {
 
